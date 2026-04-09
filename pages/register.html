@@ -4,24 +4,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register | Provenance</title>
-  <link rel="stylesheet" href="../css/dash.css" />
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../css/auth.css" />
 </head>
-<body>
-  <main class="app-shell" style="grid-template-columns:minmax(0,520px);place-content:center;">
-    <section class="workspace" style="padding:20px;">
-      <h2>Create account</h2>
-      <p style="color:#64748b;">Demo registration page.</p>
-      <form class="composer" style="grid-template-columns:1fr;border-top:none;padding:0;margin-top:12px;">
-        <input type="text" placeholder="Full name" />
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <button class="btn primary" type="button">Create Account</button>
+<body class="auth-page">
+  <main class="auth-shell">
+    <section class="auth-hero" aria-label="About Provenance">
+      <div class="auth-brand">
+        <div class="brand-mark"><i class="ph-fill ph-brain"></i></div>
+        <div><h1>Provenance</h1><p>Reasoning Engine</p></div>
+      </div>
+      <div class="hero-copy">
+        <h2>Create your account</h2>
+        <p>Set up access to query decisions, inspect rationale, and review evidence in one place.</p>
+      </div>
+      <ul class="hero-points">
+        <li><i class="ph ph-lightning"></i> Fast answers from internal history</li>
+        <li><i class="ph ph-files"></i> Linked references and source trails</li>
+        <li><i class="ph ph-users-three"></i> Shared context for your whole team</li>
+      </ul>
+    </section>
+
+    <section class="auth-card">
+      <div class="auth-header">
+        <h2>Create account</h2>
+        <p>Start with your name, work email, and password.</p>
+      </div>
+      <form id="auth-form" class="auth-form" novalidate>
+        <div class="auth-field" data-field="name">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" placeholder="Your full name" autocomplete="name" />
+          <small class="field-error">Please enter your full name.</small>
+        </div>
+        <div class="auth-field" data-field="email">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" />
+          <small class="field-error">Enter a valid email address.</small>
+        </div>
+        <div class="auth-field" data-field="password">
+          <label for="password">Password</label>
+          <div class="password-wrap">
+            <input id="password" name="password" type="password" placeholder="Create password" autocomplete="new-password" />
+            <button class="toggle-password" type="button" data-target="password" aria-label="Show password"><i class="ph ph-eye"></i></button>
+          </div>
+          <small class="field-error">Password must be at least 6 characters.</small>
+        </div>
+        <div class="auth-field" data-field="confirmPassword">
+          <label for="confirmPassword">Confirm password</label>
+          <div class="password-wrap">
+            <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" autocomplete="new-password" />
+            <button class="toggle-password" type="button" data-target="confirmPassword" aria-label="Show password"><i class="ph ph-eye"></i></button>
+          </div>
+          <small class="field-error">Passwords must match.</small>
+        </div>
+        <div class="auth-actions">
+          <button class="btn primary" type="submit"><i class="ph ph-user-plus"></i> Create account</button>
+          <p id="auth-status" class="auth-status" aria-live="polite"></p>
+        </div>
       </form>
-      <p style="margin-top:10px;"><a href="./login.html" data-route="login">Already have an account?</a></p>
-      <p><a href="./dash.html" data-route="ask">Back to app</a></p>
+      <div class="auth-links">
+        <a href="./login.html" data-route="login">Already have an account?</a>
+        <a href="./dash.html" data-route="ask">Back to app</a>
+      </div>
     </section>
   </main>
   <script src="../js/routes.js"></script>
-  <script>window.bindRouteNavigation();</script>
+  <script src="../js/auth.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard | Provenance</title>
-  <link rel="stylesheet" href="../css/dash.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
@@ -31,13 +31,14 @@
 
     <main class="workspace">
       <header class="topbar dashboard-topbar">
+        <button class="menu-toggle" aria-label="Toggle menu"><i class="ph ph-list"></i></button>
         <div class="search-wrap">
           <i class="ph ph-magnifying-glass"></i>
           <input type="text" placeholder="Ask anything about company decisions..." aria-label="Ask anything" />
         </div>
         <div class="top-actions">
-          <a href="./settings.html" data-route="settings" class="icon-btn" aria-label="Settings"><i class="ph ph-gear"></i></a>
-          <a href="./login.html" data-route="login" class="icon-btn" aria-label="Profile"><i class="ph ph-user-circle"></i></a>
+          <button class="icon-btn" aria-label="Notifications"><i class="ph ph-bell"></i></button>
+
         </div>
       </header>
 
@@ -90,6 +91,7 @@
   </div>
 
   <script src="../js/routes.js"></script>
+  <script src="../js/sidebar.js"></script>
   <script>window.bindRouteNavigation();</script>
 </body>
 </html>

@@ -472,12 +472,32 @@ a {
   }
 
   .topbar {
-    flex-direction: column;
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .search-wrap {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
   }
 
   .top-actions {
-    align-self: flex-end;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .app-shell.sidebar-open .workspace {
+    filter: blur(3px);
+    transition: filter 180ms ease;
+  }
+
+  .app-shell.sidebar-open .right-panel {
+    filter: blur(3px);
+    transition: filter 180ms ease;
   }
 }
 
@@ -656,4 +676,63 @@ a {
   margin-top: 10px;
   display: grid;
   gap: 8px;
+}
+
+.menu-toggle { display: none; }
+
+/* Sidebar toggle & mobile behaviors */
+@media (max-width: 860px) {
+  .menu-toggle { display: inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:10px; border:1px solid var(--line); background:var(--surface); color:var(--muted); cursor:pointer; margin-right:8px; }
+  .topbar { align-items:center; }
+  .menu-toggle { grid-column: 1; grid-row: 1; margin-right: 0; }
+  .left-panel {
+    position: fixed;
+    left: 14px;
+    top: 14px;
+    bottom: 14px;
+    width: 260px;
+    transform: translateX(-120%);
+    transition: transform 260ms cubic-bezier(.2,.8,.2,1);
+    z-index: 60;
+    box-shadow: 0 20px 40px rgba(15,23,42,0.25);
+  }
+  .left-panel.open { transform: translateX(0); }
+  .sidebar-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 50; opacity:0; visibility:hidden; transition:opacity 200ms ease, visibility 200ms; }
+  .sidebar-backdrop.open { opacity:1; visibility:visible; }
+  .app-shell.two-col, .app-shell { padding-left: 0; padding-right: 0; }
+}
+
+@media (max-width: 480px) {
+  .left-panel { left: 8px; top: 8px; bottom: 8px; width: 84%; max-width: 320px; border-radius:12px; }
+  .menu-toggle { margin-right:0; }
+  .topbar { gap: 8px; }
+}
+
+/* close button inside sidebar */
+.menu-close {
+  display: none;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+@media (max-width: 860px) {
+  .menu-close { display: inline-flex; }
+}
+
+/* Ensure normal desktop layout */
+@media (min-width: 861px) {
+  .left-panel { position: relative !important; transform: none !important; box-shadow: none !important; width: auto !important; }
+  .sidebar-backdrop { display: none !important; }
+  .menu-toggle { display: none !important; }
+  .menu-close { display: none !important; }
 }

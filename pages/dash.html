@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/dash.css" />
+  <link rel="stylesheet" href="../css/chat.css" />
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
@@ -47,13 +47,14 @@
 
     <main class="workspace">
       <header class="topbar">
+        <button class="menu-toggle" aria-label="Toggle menu"><i class="ph ph-list"></i></button>
         <div class="search-wrap">
           <i class="ph ph-magnifying-glass"></i>
           <input id="global-search" type="text" placeholder="Ask anything about company decisions..." aria-label="Global search" />
         </div>
         <div class="top-actions">
           <button class="icon-btn" aria-label="Notifications"><i class="ph ph-bell"></i></button>
-          <a href="./login.html" data-route="login" class="icon-btn" aria-label="Profile"><i class="ph ph-user-circle"></i></a>
+
         </div>
       </header>
 
@@ -93,6 +94,7 @@
   </div>
 
   <script src="../js/routes.js"></script>
+  <script src="../js/sidebar.js"></script>
   <script src="../js/mockData.js"></script>
   <script src="../js/dash.js"></script>
 </body>

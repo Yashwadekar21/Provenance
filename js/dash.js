@@ -6,6 +6,22 @@
     messages: []
   };
 
+  const defaultSettings = {
+    responseMode: 'detailed',
+    showReasoning: true
+  };
+
+  const readSettings = () => {
+    try {
+      const raw = localStorage.getItem('provenanceSettings');
+      if (!raw) return { ...defaultSettings };
+      return { ...defaultSettings, ...JSON.parse(raw) };
+    } catch (error) {
+      console.error('Failed to read settings.', error);
+      return { ...defaultSettings };
+    }
+  };
+
   const chatHistory = document.getElementById('chat-history');
   const chatForm = document.getElementById('chat-form');
   const promptInput = document.getElementById('prompt-input');
@@ -76,17 +92,28 @@
   `;
 
   /** @param {{answer:string,chain:string[],sources:{label:string,href:string}[]}} payload */
-  const renderAssistantMessage = (payload) => `
-    <article class="message assistant">
-      <div class="avatar ai"><i class="ph ph-robot"></i></div>
-      <div class="bubble">
-        <h3 class="answer-title">Final Answer</h3>
-        <p>${escapeHtml(payload.answer)}</p>
-
+  const renderAssistantMessage = (payload) => {
+    const settings = readSettings();
+    const isConcise = settings.responseMode === 'concise';
+    const answer = isConcise
+      ? payload.answer.split('. ').slice(0, 1).join('. ').trim()
+      : payload.answer;
+    const chainBlock = settings.showReasoning
+      ? `
         <details class="reasoning-toggle">
           <summary>View Chain of Reasoning</summary>
           <p class="reasoning-path">${payload.chain.map((step) => escapeHtml(step)).join(' -> ')}</p>
         </details>
+      `
+      : '';
+
+    return `
+    <article class="message assistant">
+      <div class="avatar ai"><i class="ph ph-robot"></i></div>
+      <div class="bubble">
+        <h3 class="answer-title">Final Answer</h3>
+        <p>${escapeHtml(answer)}</p>
+        ${chainBlock}
 
         <div class="sources">
           ${payload.sources
@@ -98,6 +125,7 @@
       </div>
     </article>
   `;
+  };
 
   const renderTyping = () => `
     <article id="typing-row" class="message assistant">
