@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decision Explorer | Provenance</title>
+  <link rel="stylesheet" href="../css/dash.css" />
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+  <div class="app-shell two-col">
+    <aside class="left-panel">
+      <div class="brand"><div class="brand-mark"><i class="ph-fill ph-brain"></i></div><div><h1>Provenance</h1><p>Reasoning Engine</p></div></div>
+      <nav class="primary-nav">
+        <a href="./dashboard.html" data-route="dashboard" class="nav-item"><i class="ph ph-squares-four"></i> Dashboard</a>
+        <a href="./dash.html" data-route="ask" class="nav-item"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
+        <a href="./decision-explorer.html" data-route="decision" class="nav-item active"><i class="ph ph-graph"></i> Decision Explorer</a>
+        <a href="./source-library.html" data-route="sources" class="nav-item"><i class="ph ph-books"></i> Source Library</a>
+        <a href="./conflict-checker.html" data-route="conflicts" class="nav-item"><i class="ph ph-warning-circle"></i> Conflict Checker</a>
+      </nav>
+    
+      <div class="left-footer">
+        <a href="./settings.html" data-route="settings" class="nav-item footer-item"><i class="ph ph-gear"></i> Settings</a>
+        <a href="./login.html" data-route="login" class="nav-item footer-item danger"><i class="ph ph-sign-out"></i> Logout</a>
+      </div>
+
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar"><h2>Decision Explorer</h2></header>
+      <section class="chat-history">
+        <article class="card"><h3>Decision: Cloud Provider</h3><p>AWS vs GCP -> <strong>GCP selected</strong> due to cost and Kubernetes alignment.</p></article>
+        <article class="card"><h3>Decision: Payment Vendor</h3><p>PayPal vs Stripe -> <strong>Stripe selected</strong> due to API and reliability.</p></article>
+      </section>
+      <div class="composer"><a class="btn primary" href="./dash.html" data-route="ask">Ask Follow-up</a></div>
+    </main>
+  </div>
+  <script src="../js/routes.js"></script>
+  <script>window.bindRouteNavigation();</script>
+</body>
+</html>
