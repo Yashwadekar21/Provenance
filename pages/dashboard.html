@@ -10,35 +10,85 @@
 <body>
   <div class="app-shell two-col">
     <aside class="left-panel">
-      <div class="brand"><div class="brand-mark"><i class="ph-fill ph-brain"></i></div><div><h1>Provenance</h1><p>Reasoning Engine</p></div></div>
+      <div class="brand">
+        <div class="brand-mark"><i class="ph-fill ph-brain"></i></div>
+        <div><h1>Provenance</h1><p>Reasoning Engine</p></div>
+      </div>
+
       <nav class="primary-nav">
         <a href="./dashboard.html" data-route="dashboard" class="nav-item active"><i class="ph ph-squares-four"></i> Dashboard</a>
         <a href="./dash.html" data-route="ask" class="nav-item"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
-        <a href="./decision-explorer.html" data-route="decision" class="nav-item"><i class="ph ph-graph"></i> Decision Explorer</a>
-        <a href="./source-library.html" data-route="sources" class="nav-item"><i class="ph ph-books"></i> Source Library</a>
-        <a href="./conflict-checker.html" data-route="conflicts" class="nav-item"><i class="ph ph-warning-circle"></i> Conflict Checker</a>
+        <a href="./decision-explorer.html" data-route="decision" class="nav-item"><i class="ph ph-graph"></i> Explorer</a>
+        <a href="./source-library.html" data-route="sources" class="nav-item"><i class="ph ph-books"></i> Sources</a>
+        <a href="./conflict-checker.html" data-route="conflicts" class="nav-item"><i class="ph ph-warning-circle"></i> Conflicts</a>
       </nav>
-    
+
       <div class="left-footer">
         <a href="./settings.html" data-route="settings" class="nav-item footer-item"><i class="ph ph-gear"></i> Settings</a>
         <a href="./login.html" data-route="login" class="nav-item footer-item danger"><i class="ph ph-sign-out"></i> Logout</a>
       </div>
-
     </aside>
 
     <main class="workspace">
-      <header class="topbar"><h2>Dashboard</h2></header>
-      <section class="chat-history">
+      <header class="topbar dashboard-topbar">
+        <div class="search-wrap">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Ask anything about company decisions..." aria-label="Ask anything" />
+        </div>
+        <div class="top-actions">
+          <a href="./settings.html" data-route="settings" class="icon-btn" aria-label="Settings"><i class="ph ph-gear"></i></a>
+          <a href="./login.html" data-route="login" class="icon-btn" aria-label="Profile"><i class="ph ph-user-circle"></i></a>
+        </div>
+      </header>
+
+      <section class="chat-history dashboard-main">
+        <div class="dashboard-overview-cards">
+          <article class="card metric-card">
+            <p class="metric-label">Decisions</p>
+            <p class="metric-value">143</p>
+          </article>
+          <article class="card metric-card">
+            <p class="metric-label">Sources</p>
+            <p class="metric-value">Slack · Gmail · GitHub</p>
+          </article>
+          <article class="card metric-card alert">
+            <p class="metric-label">Alerts</p>
+            <p class="metric-value">3 open conflicts</p>
+          </article>
+        </div>
+
+        <div class="dashboard-sections-grid">
+          <article class="card">
+            <div class="card-head"><h2>Recent Decisions</h2><i class="ph ph-clock-counter-clockwise"></i></div>
+            <ul class="dashboard-items">
+              <li><strong>GCP vs AWS</strong><span>GCP selected for cost + Kubernetes alignment</span></li>
+              <li><strong>Auth flow change</strong><span>Moved to token rotation for better security</span></li>
+              <li><strong>Stripe rollout</strong><span>Selected for API reliability and velocity</span></li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card-head"><h2>Recent Questions</h2><i class="ph ph-chat-text"></i></div>
+            <ul class="dashboard-items">
+              <li><strong>Why did we choose GCP?</strong><span>4 minutes ago</span></li>
+              <li><strong>Who approved Stripe migration?</strong><span>19 minutes ago</span></li>
+              <li><strong>What changed in auth architecture?</strong><span>42 minutes ago</span></li>
+            </ul>
+          </article>
+        </div>
+
         <article class="card">
-          <h3>System Overview</h3>
-          <p>Total decisions indexed: <strong>143</strong></p>
-          <p>Reasoning chains: <strong>89</strong></p>
-          <p>Sources connected: <strong>Slack + Gmail + GitHub</strong></p>
+          <div class="card-head"><h2>What the system can answer</h2><i class="ph ph-lightbulb"></i></div>
+          <p class="capability-copy">It can explain why decisions were made, who was involved, what alternatives were considered, and cite source threads/emails behind each answer.</p>
         </article>
       </section>
-      <div class="composer"><a class="btn primary" href="./dash.html" data-route="ask">Go to Ask AI</a></div>
+
+      <div class="composer">
+        <a class="btn primary" href="./dash.html" data-route="ask"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
+      </div>
     </main>
   </div>
+
   <script src="../js/routes.js"></script>
   <script>window.bindRouteNavigation();</script>
 </body>

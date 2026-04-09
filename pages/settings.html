@@ -25,7 +25,16 @@
     </aside>
 
     <main class="workspace">
-      <header class="topbar"><h2>Settings</h2></header>
+      <header class="topbar">
+        <div class="search-wrap">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Ask anything about company decisions..." aria-label="Global decision search" />
+        </div>
+        <div class="top-actions">
+          <a href="./settings.html" data-route="settings" class="icon-btn" aria-label="Settings"><i class="ph ph-gear"></i></a>
+          <a href="./login.html" data-route="login" class="icon-btn" aria-label="Profile"><i class="ph ph-user-circle"></i></a>
+        </div>
+      </header>
       <section class="chat-history">
         <article class="card"><h3>Theme</h3><p>Enterprise light theme enabled.</p></article>
         <article class="card"><h3>Notifications</h3><p>Email + in-app notifications are active.</p></article>

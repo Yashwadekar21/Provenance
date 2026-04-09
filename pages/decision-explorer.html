@@ -18,21 +18,64 @@
         <a href="./source-library.html" data-route="sources" class="nav-item"><i class="ph ph-books"></i> Source Library</a>
         <a href="./conflict-checker.html" data-route="conflicts" class="nav-item"><i class="ph ph-warning-circle"></i> Conflict Checker</a>
       </nav>
-    
+
       <div class="left-footer">
         <a href="./settings.html" data-route="settings" class="nav-item footer-item"><i class="ph ph-gear"></i> Settings</a>
         <a href="./login.html" data-route="login" class="nav-item footer-item danger"><i class="ph ph-sign-out"></i> Logout</a>
       </div>
-
     </aside>
 
     <main class="workspace">
-      <header class="topbar"><h2>Decision Explorer</h2></header>
-      <section class="chat-history">
-        <article class="card"><h3>Decision: Cloud Provider</h3><p>AWS vs GCP -> <strong>GCP selected</strong> due to cost and Kubernetes alignment.</p></article>
-        <article class="card"><h3>Decision: Payment Vendor</h3><p>PayPal vs Stripe -> <strong>Stripe selected</strong> due to API and reliability.</p></article>
+      <header class="topbar">
+        <div class="search-wrap">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Ask anything about company decisions..." aria-label="Global decision search" />
+        </div>
+        <div class="top-actions">
+          <a href="./settings.html" data-route="settings" class="icon-btn" aria-label="Settings"><i class="ph ph-gear"></i></a>
+          <a href="./login.html" data-route="login" class="icon-btn" aria-label="Profile"><i class="ph ph-user-circle"></i></a>
+        </div>
+      </header>
+
+      <section class="chat-history explorer-layout">
+        <article class="card">
+          <div class="card-head"><h2>Decision Graph</h2><span class="pill">Graph Summary</span></div>
+          <div class="decision-graph-box">
+            <div class="graph-row"><span class="g-node center">Vendor A</span></div>
+            <div class="graph-row"><span class="g-node">Cost</span><span class="g-node">API</span><span class="g-node">Scalability</span></div>
+            <div class="graph-row"><span class="g-node center">Decision: Selected because of balanced tradeoffs</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><h2>Details Panel</h2><span class="pill">Confidence 92%</span></div>
+          <ul class="dashboard-items">
+            <li><strong>Who proposed it</strong><span>Alice (Architecture) and Adam (DevOps)</span></li>
+            <li><strong>Alternatives considered</strong><span>Vendor B for lower base pricing, Vendor C for legacy compatibility</span></li>
+            <li><strong>Final rationale</strong><span>Vendor A reduced operational complexity while meeting API and scaling requirements.</span></li>
+            <li><strong>Source mapping</strong><span>Slack #123, Gmail vendor thread, DevOps meeting note</span></li>
+          </ul>
+          <div class="sources">
+            <a class="source-badge" href="#">📝 Slack #123</a>
+            <a class="source-badge" href="#">📝 Gmail thread</a>
+            <a class="source-badge" href="#">📝 Meeting note</a>
+            <a class="source-badge" href="#">📝 Doc section</a>
+          </div>
+        </article>
+
+        <details class="card reasoning-drawer" open>
+          <summary>Show reasoning drawer</summary>
+          <div class="drawer-grid">
+            <article class="list-item"><i class="ph ph-check-circle"></i> Decision: Vendor A selected</article>
+            <article class="list-item"><i class="ph ph-arrows-left-right"></i> Alternatives: Vendor B, Vendor C</article>
+            <article class="list-item"><i class="ph ph-scales"></i> Tradeoffs: cost vs API maturity vs scalability</article>
+            <article class="list-item"><i class="ph ph-users-three"></i> Entities: Alice, Adam, Platform Team</article>
+            <article class="list-item"><i class="ph ph-timeline"></i> Timeline: Debate -> Pilot -> Approval</article>
+          </div>
+        </details>
       </section>
-      <div class="composer"><a class="btn primary" href="./dash.html" data-route="ask">Ask Follow-up</a></div>
+
+      <div class="composer"><a class="btn primary" href="./dash.html" data-route="ask">Ask Follow-up in Chat</a></div>
     </main>
   </div>
   <script src="../js/routes.js"></script>

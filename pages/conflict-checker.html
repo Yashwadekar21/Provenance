@@ -18,16 +18,23 @@
         <a href="./source-library.html" data-route="sources" class="nav-item"><i class="ph ph-books"></i> Source Library</a>
         <a href="./conflict-checker.html" data-route="conflicts" class="nav-item active"><i class="ph ph-warning-circle"></i> Conflict Checker</a>
       </nav>
-    
       <div class="left-footer">
         <a href="./settings.html" data-route="settings" class="nav-item footer-item"><i class="ph ph-gear"></i> Settings</a>
         <a href="./login.html" data-route="login" class="nav-item footer-item danger"><i class="ph ph-sign-out"></i> Logout</a>
       </div>
-
     </aside>
 
     <main class="workspace">
-      <header class="topbar"><h2>Conflict Checker</h2></header>
+      <header class="topbar">
+        <div class="search-wrap">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Ask anything about company decisions..." aria-label="Global decision search" />
+        </div>
+        <div class="top-actions">
+          <a href="./settings.html" data-route="settings" class="icon-btn" aria-label="Settings"><i class="ph ph-gear"></i></a>
+          <a href="./login.html" data-route="login" class="icon-btn" aria-label="Profile"><i class="ph ph-user-circle"></i></a>
+        </div>
+      </header>
       <section class="chat-history">
         <article class="card">
           <h3>Proposed action</h3>
