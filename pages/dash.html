@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizational Memory Engine</title>
+    <link rel="stylesheet" href="../css/dash.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar left-sidebar">
+            <div class="logo">
+                <i class="ph ph-brain"></i>
+                <h2>Memory Engine</h2>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="#" class="nav-item"><i class="ph ph-squares-four"></i> Dashboard</a>
+                <a href="#" class="nav-item active"><i class="ph ph-chat-teardrop"></i> Ask AI</a>
+                <a href="#" class="nav-item"><i class="ph ph-git-branch"></i> Decision Explorer</a>
+                <a href="#" class="nav-item"><i class="ph ph-books"></i> Source Library</a>
+            </nav>
+
+            <div class="filters-section">
+                <h3>Data Sources</h3>
+                <label class="toggle"><input type="checkbox" checked> Slack</label>
+                <label class="toggle"><input type="checkbox" checked> Gmail</label>
+                <label class="toggle"><input type="checkbox" checked> Docs</label>
+            </div>
+
+            <button class="clear-btn" id="clear-chat"><i class="ph ph-trash"></i> Clear Chat</button>
+        </aside>
+
+        <main class="chat-area">
+            <header class="chat-header">
+                <div class="search-bar">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input type="text" placeholder="Ask anything about company decisions...">
+                </div>
+            </header>
+
+            <div class="chat-history" id="chat-history">
+                <div class="message user-message">
+                    <div class="avatar user-avatar">JT</div>
+                    <div class="bubble">Why did we choose GCP over AWS?</div>
+                </div>
+
+                <div class="message ai-message">
+                    <div class="avatar ai-avatar"><i class="ph ph-robot"></i></div>
+                    <div class="bubble">
+                        <h3>Google Cloud Platform (GCP) was selected over Amazon Web Services (AWS) for the following reasons:</h3>
+                        <ul>
+                            <li>It was ~20% cheaper based on our projected workloads.</li>
+                            <li>It integrated better with our Kubernetes deployment pipeline.</li>
+                            <li>It was easier for our existing DevOps team to manage.</li>
+                        </ul>
+                        
+                        <div class="inline-sources">
+                            <span class="tag"><i class="ph ph-slack-logo"></i> Slack Thread #123</span>
+                            <span class="tag"><i class="ph ph-envelope"></i> Gmail: Vendor Selection</span>
+                        </div>
+
+                        <div class="mock-graph">
+                            <h4>Reasoning Graph</h4>
+                            <div class="graph-nodes">
+                                <div class="node central">GCP</div>
+                                <div class="node reason">Lower Cost</div>
+                                <div class="node reason">K8s Integration</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="prompt-input" placeholder="Type your question here...">
+                <button id="send-btn"><i class="ph ph-paper-plane-right"></i> Send</button>
+            </div>
+        </main>
+
+        <aside class="sidebar right-sidebar">
+            <div class="context-card">
+                <div class="card-header">
+                    <h3>Sources & Confidence</h3>
+                    <span class="confidence-badge">92%</span>
+                </div>
+                <div class="source-list">
+                    <div class="source-item"><i class="ph ph-slack-logo"></i> Slack Thread #123</div>
+                    <div class="source-item"><i class="ph ph-envelope"></i> Gmail: Vendor Selection</div>
+                    <div class="source-item"><i class="ph ph-users"></i> DevOps Meeting</div>
+                </div>
+            </div>
+
+            <div class="context-card suggestions">
+                <h3>Suggestions</h3>
+                <ul>
+                    <li>Why did we reject AWS?</li>
+                    <li>Who proposed upgrading Kubernetes?</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+    <script src="../js/dash.js"></script>
+</body>
+</html>
