@@ -75,17 +75,19 @@
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    /* Optional: bypass strict validation for demo purposes 
     if (!validate()) {
       status.textContent = 'Please correct the highlighted fields.';
       status.classList.add('error');
-      return;
+      // return; // Uncomment to enforce validation
     }
+    */
 
     status.classList.remove('error');
     status.textContent = isRegister ? 'Account created. Redirecting to login...' : 'Signed in. Redirecting...';
 
     window.setTimeout(() => {
-      window.location.href = isRegister ? './login.html' : './dash.html';
-    }, 900);
+      window.location.href = isRegister ? './login.html' : './dashboard.html';
+    }, 500);
   });
 })();

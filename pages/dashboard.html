@@ -17,7 +17,7 @@
 
       <nav class="primary-nav">
         <a href="./dashboard.html" data-route="dashboard" class="nav-item active"><i class="ph ph-squares-four"></i> Dashboard</a>
-        <a href="./dash.html" data-route="ask" class="nav-item"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
+        <a href="./chat.html" data-route="ask" class="nav-item"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
         <a href="./decision-explorer.html" data-route="decision" class="nav-item"><i class="ph ph-graph"></i> Explorer</a>
         <a href="./source-library.html" data-route="sources" class="nav-item"><i class="ph ph-books"></i> Sources</a>
         <a href="./conflict-checker.html" data-route="conflicts" class="nav-item"><i class="ph ph-warning-circle"></i> Conflicts</a>
@@ -32,13 +32,17 @@
     <main class="workspace">
       <header class="topbar dashboard-topbar">
         <button class="menu-toggle" aria-label="Toggle menu"><i class="ph ph-list"></i></button>
+        <div class="title-block">
+          <p class="eyebrow">Company Decision Intelligence</p>
+          <h2>Executive Dashboard</h2>
+        </div>
         <div class="search-wrap">
           <i class="ph ph-magnifying-glass"></i>
           <input type="text" placeholder="Ask anything about company decisions..." aria-label="Ask anything" />
         </div>
         <div class="top-actions">
           <button class="icon-btn" aria-label="Notifications"><i class="ph ph-bell"></i></button>
-
+          <button class="btn btn-outline" type="button" id="refresh-metrics"><i class="ph ph-arrows-clockwise"></i> Refresh</button>
         </div>
       </header>
 
@@ -46,20 +50,37 @@
         <div class="dashboard-overview-cards">
           <article class="card metric-card">
             <p class="metric-label">Decisions</p>
-            <p class="metric-value">143</p>
+            <p class="metric-value" data-counter="143">0</p>
+            <p class="metric-meta positive"><i class="ph ph-trend-up"></i> +12 this week</p>
           </article>
           <article class="card metric-card">
-            <p class="metric-label">Sources</p>
-            <p class="metric-value">Slack · Gmail · GitHub</p>
+            <p class="metric-label">Signals Ingested</p>
+            <p class="metric-value" data-counter="1289">0</p>
+            <p class="metric-meta"><i class="ph ph-wifi-high"></i> Slack, Gmail, GitHub</p>
           </article>
           <article class="card metric-card alert">
             <p class="metric-label">Alerts</p>
-            <p class="metric-value">3 open conflicts</p>
+            <p class="metric-value" data-counter="3">0</p>
+            <p class="metric-meta warning"><i class="ph ph-warning-circle"></i> Needs triage today</p>
+          </article>
+          <article class="card metric-card">
+            <p class="metric-label">Answer Confidence</p>
+            <p class="metric-value"><span data-counter="96">0</span>%</p>
+            <p class="metric-meta positive"><i class="ph ph-seal-check"></i> Model quality stable</p>
           </article>
         </div>
 
+        <div class="toolbar-row">
+          <div class="chip-group" role="tablist" aria-label="Filter dashboard cards">
+            <button class="chip active" type="button" data-filter="all">All</button>
+            <button class="chip" type="button" data-filter="decisions">Decisions</button>
+            <button class="chip" type="button" data-filter="questions">Questions</button>
+            <button class="chip" type="button" data-filter="system">System</button>
+          </div>
+        </div>
+
         <div class="dashboard-sections-grid">
-          <article class="card">
+          <article class="card panel-card" data-kind="decisions">
             <div class="card-head"><h2>Recent Decisions</h2><i class="ph ph-clock-counter-clockwise"></i></div>
             <ul class="dashboard-items">
               <li><strong>GCP vs AWS</strong><span>GCP selected for cost + Kubernetes alignment</span></li>
@@ -68,7 +89,7 @@
             </ul>
           </article>
 
-          <article class="card">
+          <article class="card panel-card" data-kind="questions">
             <div class="card-head"><h2>Recent Questions</h2><i class="ph ph-chat-text"></i></div>
             <ul class="dashboard-items">
               <li><strong>Why did we choose GCP?</strong><span>4 minutes ago</span></li>
@@ -76,22 +97,33 @@
               <li><strong>What changed in auth architecture?</strong><span>42 minutes ago</span></li>
             </ul>
           </article>
+
+          <article class="card panel-card" data-kind="system">
+            <div class="card-head"><h2>Resolution Pipeline</h2><i class="ph ph-path"></i></div>
+            <div class="pipeline">
+              <div class="stage done"><span>Ingest</span><small>Healthy</small></div>
+              <div class="stage done"><span>Embed</span><small>Healthy</small></div>
+              <div class="stage in-progress"><span>Index</span><small>Processing</small></div>
+              <div class="stage"><span>Explain</span><small>Queued</small></div>
+            </div>
+          </article>
         </div>
 
-        <article class="card">
+        <article class="card panel-card" data-kind="system">
           <div class="card-head"><h2>What the system can answer</h2><i class="ph ph-lightbulb"></i></div>
           <p class="capability-copy">It can explain why decisions were made, who was involved, what alternatives were considered, and cite source threads/emails behind each answer.</p>
         </article>
       </section>
 
       <div class="composer">
-        <a class="btn primary" href="./dash.html" data-route="ask"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
+        <a class="btn primary" href="./chat.html" data-route="ask"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
       </div>
     </main>
   </div>
 
   <script src="../js/routes.js"></script>
   <script src="../js/sidebar.js"></script>
+  <script src="../js/dashboard.js"></script>
   <script>window.bindRouteNavigation();</script>
 </body>
 </html>

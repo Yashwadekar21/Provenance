@@ -1,12 +1,119 @@
-@import './dash.css';
-/* Decision Explorer page tweaks */
+@import './dashboard.css';
+@import './insights-common.css';
+
+.explorer-layout {
+  display: grid;
+  gap: 12px;
+}
+
+.explorer-layout .page-intro {
+  border-style: solid;
+}
+
+.decision-graph-box {
+  min-height: 180px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  background: var(--surface-soft);
+  display: grid;
+  gap: 10px;
+  align-content: center;
+  padding: 16px;
+}
+
+.graph-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.g-node {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  background: var(--surface);
+}
+
+.g-node.center {
+  background: color-mix(in srgb, var(--primary) 12%, white);
+  border-color: color-mix(in srgb, var(--primary) 20%, white);
+  color: color-mix(in srgb, var(--primary) 72%, black);
+  font-weight: 600;
+}
+
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.source-badge {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  background: var(--surface-soft);
+}
+
+.source-badge:hover {
+  background: var(--surface-tint);
+}
+
+.reasoning-drawer summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.reasoning-drawer {
+  border-style: dashed;
+}
+
+.reasoning-drawer[open] summary {
+  margin-bottom: 10px;
+}
+
+.drawer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.list-item {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  background: var(--surface-soft);
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 860px) {
+  .drawer-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 @media (max-width: 480px) {
-  .app-shell { grid-template-columns: 1fr !important; padding: 10px !important; }
-  .decision-graph-box { min-height: 120px !important; padding: 10px !important; }
-  .graph-row { flex-direction: column; gap: 8px; }
-  .g-node { font-size: 0.68rem; padding: 6px 8px; }
-  .card { padding: 10px; }
-  .composer { position: fixed; left: 10px; right: 10px; bottom: 10px; z-index: 60; }
-  .workspace { padding-bottom: 96px; }
+  .decision-graph-box {
+    min-height: 130px;
+    padding: 10px;
+  }
+
+  .graph-row {
+    gap: 6px;
+  }
+
+  .g-node {
+    font-size: 0.72rem;
+    padding: 6px 8px;
+  }
 }

@@ -1,12 +1,12 @@
-@import './dash.css';
+@import './dashboard.css';
 
 body.auth-page {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.14), transparent 35%),
+    radial-gradient(circle at 10% 10%, rgba(15, 75, 214, 0.12), transparent 35%),
     radial-gradient(circle at 95% 95%, rgba(14, 165, 233, 0.12), transparent 45%),
-    #f4f7fb;
+    var(--bg);
 }
 
 .auth-shell {
@@ -21,10 +21,10 @@ body.auth-page {
 
 .auth-hero,
 .auth-card {
-  background: #ffffff;
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 18px;
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 
 .auth-hero {
@@ -80,8 +80,8 @@ body.auth-page {
   padding: 10px;
   border: 1px solid var(--line);
   border-radius: 10px;
-  background: #f8fafc;
-  color: #334155;
+  background: var(--surface-soft);
+  color: var(--text-soft);
 }
 
 .auth-card {
@@ -110,21 +110,25 @@ body.auth-page {
 
 .auth-field label {
   font-weight: 600;
-  color: #334155;
+  color: var(--text-soft);
   font-size: 0.9rem;
 }
 
-.auth-field input {
+.auth-field input,
+.settings-field select {
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 12px 14px;
   outline: none;
   transition: border-color 160ms ease, box-shadow 160ms ease;
+  background: var(--surface);
+  color: var(--text);
 }
 
-.auth-field input:focus {
-  border-color: #60a5fa;
-  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.2);
+.auth-field input:focus,
+.settings-field select:focus {
+  border-color: color-mix(in srgb, var(--primary) 35%, white);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 20%, white);
 }
 
 .password-wrap {
@@ -135,7 +139,7 @@ body.auth-page {
 
 .toggle-password {
   border: 1px solid var(--line);
-  background: #f8fafc;
+  background: var(--surface-soft);
   border-radius: 10px;
   padding: 0 12px;
   color: var(--muted);
@@ -152,11 +156,11 @@ body.auth-page {
   margin: 0;
   min-height: 18px;
   font-size: 0.86rem;
-  color: #0f766e;
+  color: var(--success);
 }
 
 .auth-status.error {
-  color: #b91c1c;
+  color: var(--danger-text);
 }
 
 .auth-links {
@@ -172,17 +176,47 @@ body.auth-page {
 
 .field-error {
   display: none;
-  color: #b91c1c;
+  color: var(--danger-text);
   font-size: 0.8rem;
 }
 
 .auth-field.invalid input {
-  border-color: #fda4af;
-  background: #fff1f2;
+  border-color: color-mix(in srgb, var(--danger-text) 36%, white);
+  background: #fff7f8;
 }
 
 .auth-field.invalid .field-error {
   display: block;
+}
+
+.settings-card h3 {
+  margin: 0 0 8px;
+}
+
+.settings-help {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.settings-field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.settings-field span {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+.settings-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  color: var(--text-soft);
 }
 
 @media (max-width: 900px) {
@@ -205,7 +239,7 @@ body.auth-page {
 
   .auth-card {
     padding: 16px;
-    border-radius: 14px;
+    border-radius: var(--radius-md);
   }
 
   .auth-actions .btn {

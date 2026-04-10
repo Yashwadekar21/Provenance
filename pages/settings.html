@@ -3,74 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Settings | Provenance</title>
-  <link rel="stylesheet" href="../css/settings.css" />
+  <title>Register | Provenance</title>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../css/auth.css" />
 </head>
-<body>
-  <div class="app-shell two-col">
-    <aside class="left-panel">
-      <div class="brand"><div class="brand-mark"><i class="ph-fill ph-brain"></i></div><div><h1>Provenance</h1><p>Reasoning Engine</p></div></div>
-      <nav class="primary-nav">
-        <a href="./dashboard.html" data-route="dashboard" class="nav-item"><i class="ph ph-squares-four"></i> Dashboard</a>
-        <a href="./dash.html" data-route="ask" class="nav-item"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
-        <a href="./decision-explorer.html" data-route="decision" class="nav-item"><i class="ph ph-graph"></i> Decision Explorer</a>
-        <a href="./source-library.html" data-route="sources" class="nav-item"><i class="ph ph-books"></i> Source Library</a>
-        <a href="./conflict-checker.html" data-route="conflicts" class="nav-item"><i class="ph ph-warning-circle"></i> Conflict Checker</a>
-      </nav>
-      <div class="left-footer">
-        <a href="./settings.html" data-route="settings" class="nav-item footer-item active"><i class="ph ph-gear"></i> Settings</a>
-        <a href="./login.html" data-route="login" class="nav-item footer-item danger"><i class="ph ph-sign-out"></i> Logout</a>
+<body class="auth-page">
+  <main class="auth-shell">
+    <section class="auth-hero" aria-label="About Provenance">
+      <div class="auth-brand">
+        <div class="brand-mark"><i class="ph-fill ph-brain"></i></div>
+        <div><h1>Provenance</h1><p>Reasoning Engine</p></div>
       </div>
-    </aside>
+      <div class="hero-copy">
+        <h2>Create your account</h2>
+        <p>Set up access to query decisions, inspect rationale, and review evidence in one place.</p>
+      </div>
+      <ul class="hero-points">
+        <li><i class="ph ph-lightning"></i> Fast answers from internal history</li>
+        <li><i class="ph ph-files"></i> Linked references and source trails</li>
+        <li><i class="ph ph-users-three"></i> Shared context for your whole team</li>
+      </ul>
+    </section>
 
-    <main class="workspace">
-      <header class="topbar">
-        <button class="menu-toggle" aria-label="Toggle menu"><i class="ph ph-list"></i></button>
-        <div class="search-wrap">
-          <i class="ph ph-magnifying-glass"></i>
-          <input type="text" placeholder="Ask anything about company decisions..." aria-label="Global decision search" />
+    <section class="auth-card">
+      <div class="auth-header">
+        <h2>Create account</h2>
+        <p>Start with your name, work email, and password.</p>
+      </div>
+      <form id="auth-form" class="auth-form" novalidate>
+        <div class="auth-field" data-field="name">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" placeholder="Your full name" autocomplete="name" />
+          <small class="field-error">Please enter your full name.</small>
         </div>
-        <div class="top-actions">
-          <button class="icon-btn" aria-label="Notifications"><i class="ph ph-bell"></i></button>
-
+        <div class="auth-field" data-field="email">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" />
+          <small class="field-error">Enter a valid email address.</small>
         </div>
-      </header>
-      <section class="chat-history">
-        <article class="card settings-card">
-          <h3>AI Response Style</h3>
-          <p class="settings-help">Choose how answers are generated in chat responses.</p>
-          <label class="settings-field">
-            <span>Response mode</span>
-            <select id="response-mode">
-              <option value="detailed">Detailed</option>
-              <option value="concise">Concise</option>
-            </select>
-          </label>
-          <label class="settings-check">
-            <input id="show-reasoning" type="checkbox" />
-            <span>Show chain of reasoning in responses</span>
-          </label>
-        </article>
-
-        <article class="card settings-card">
-          <h3>Notifications</h3>
-          <p class="settings-help">Email + in-app notifications are active.</p>
-          <label class="settings-check">
-            <input id="notify-email" type="checkbox" checked />
-            <span>Email notifications</span>
-          </label>
-          <label class="settings-check">
-            <input id="notify-inapp" type="checkbox" checked />
-            <span>In-app notifications</span>
-          </label>
-        </article>
-      </section>
-      <div class="composer"><a class="btn primary" href="./dash.html" data-route="ask">Back to Chat</a></div>
-    </main>
-  </div>
+        <div class="auth-field" data-field="password">
+          <label for="password">Password</label>
+          <div class="password-wrap">
+            <input id="password" name="password" type="password" placeholder="Create password" autocomplete="new-password" />
+            <button class="toggle-password" type="button" data-target="password" aria-label="Show password"><i class="ph ph-eye"></i></button>
+          </div>
+          <small class="field-error">Password must be at least 6 characters.</small>
+        </div>
+        <div class="auth-field" data-field="confirmPassword">
+          <label for="confirmPassword">Confirm password</label>
+          <div class="password-wrap">
+            <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" autocomplete="new-password" />
+            <button class="toggle-password" type="button" data-target="confirmPassword" aria-label="Show password"><i class="ph ph-eye"></i></button>
+          </div>
+          <small class="field-error">Passwords must match.</small>
+        </div>
+        <div class="auth-actions">
+          <button class="btn primary" type="submit"><i class="ph ph-user-plus"></i> Create account</button>
+          <p id="auth-status" class="auth-status" aria-live="polite"></p>
+        </div>
+      </form>
+      <div class="auth-links">
+        <a href="./login.html" data-route="login">Already have an account?</a>
+        <a href="./chat.html" data-route="ask">Back to app</a>
+      </div>
+    </section>
+  </main>
   <script src="../js/routes.js"></script>
-  <script src="../js/sidebar.js"></script>
-  <script src="../js/settings.js"></script>
+  <script src="../js/auth.js"></script>
 </body>
 </html>

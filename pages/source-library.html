@@ -13,7 +13,7 @@
       <div class="brand"><div class="brand-mark"><i class="ph-fill ph-brain"></i></div><div><h1>Provenance</h1><p>Reasoning Engine</p></div></div>
       <nav class="primary-nav">
         <a href="./dashboard.html" data-route="dashboard" class="nav-item"><i class="ph ph-squares-four"></i> Dashboard</a>
-        <a href="./dash.html" data-route="ask" class="nav-item"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
+        <a href="./chat.html" data-route="ask" class="nav-item"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
         <a href="./decision-explorer.html" data-route="decision" class="nav-item"><i class="ph ph-graph"></i> Decision Explorer</a>
         <a href="./source-library.html" data-route="sources" class="nav-item active"><i class="ph ph-books"></i> Source Library</a>
         <a href="./conflict-checker.html" data-route="conflicts" class="nav-item"><i class="ph ph-warning-circle"></i> Conflict Checker</a>
@@ -37,13 +37,40 @@
         </div>
       </header>
       <section class="chat-history">
-        <article class="list-item"><i class="ph ph-slack-logo"></i> Slack Thread #123 - Cloud migration debate</article>
-        <article class="list-item"><i class="ph ph-envelope"></i> Email - Vendor selection summary</article>
-        <article class="list-item"><i class="ph ph-github-logo"></i> PR #459 - Kubernetes rollout notes</article>
+        <article class="page-intro" data-search-item="source library indexed docs references">
+          <h2>Source Library</h2>
+          <p>Search and scan the raw artifacts that feed decision answers. Use the top search to filter results instantly.</p>
+          <div class="stat-row">
+            <span class="stat-pill">3 Indexed Sources</span>
+            <span class="stat-pill">Last Sync: 2m ago</span>
+            <span class="stat-pill">Coverage: Slack, Gmail, GitHub</span>
+          </div>
+        </article>
+
+        <article class="content-item" data-search-item="slack thread 123 cloud migration debate infra team">
+          <h3><i class="ph ph-slack-logo"></i> Slack Thread #123</h3>
+          <p>Cloud migration debate between Platform and Finance teams discussing Kubernetes cost tradeoffs.</p>
+          <div class="item-meta"><span>Slack</span><span>12 comments</span><span>Updated 1h ago</span></div>
+        </article>
+
+        <article class="content-item" data-search-item="email vendor selection summary contract approval">
+          <h3><i class="ph ph-envelope"></i> Email: Vendor Selection Summary</h3>
+          <p>Consolidated summary of vendor scorecards, risk notes, and final approval recommendation.</p>
+          <div class="item-meta"><span>Gmail</span><span>6 participants</span><span>Updated today</span></div>
+        </article>
+
+        <article class="content-item" data-search-item="github pr 459 kubernetes rollout notes deployment">
+          <h3><i class="ph ph-github-logo"></i> GitHub PR #459</h3>
+          <p>Kubernetes rollout notes with deployment decisions, rollback plan, and performance checks.</p>
+          <div class="item-meta"><span>GitHub</span><span>Code + comments</span><span>Merged</span></div>
+        </article>
+
+        <div class="filter-empty" data-empty-state>No sources match this search. Try another keyword.</div>
       </section>
-      <div class="composer"><a class="btn primary" href="./dash.html" data-route="ask">Open Chat</a></div>
+      <div class="composer"><a class="btn primary" href="./chat.html" data-route="ask">Open Chat</a></div>
     </main>
   </div>
+  <script src="../js/insights-interactions.js"></script>
   <script src="../js/routes.js"></script>
   <script src="../js/sidebar.js"></script>
   <script>window.bindRouteNavigation();</script>

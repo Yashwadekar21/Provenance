@@ -13,7 +13,7 @@
       <div class="brand"><div class="brand-mark"><i class="ph-fill ph-brain"></i></div><div><h1>Provenance</h1><p>Reasoning Engine</p></div></div>
       <nav class="primary-nav">
         <a href="./dashboard.html" data-route="dashboard" class="nav-item"><i class="ph ph-squares-four"></i> Dashboard</a>
-        <a href="./dash.html" data-route="ask" class="nav-item"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
+        <a href="./chat.html" data-route="ask" class="nav-item"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
         <a href="./decision-explorer.html" data-route="decision" class="nav-item"><i class="ph ph-graph"></i> Decision Explorer</a>
         <a href="./source-library.html" data-route="sources" class="nav-item"><i class="ph ph-books"></i> Source Library</a>
         <a href="./conflict-checker.html" data-route="conflicts" class="nav-item active"><i class="ph ph-warning-circle"></i> Conflict Checker</a>
@@ -37,15 +37,53 @@
         </div>
       </header>
       <section class="chat-history">
-        <article class="card">
-          <h3>Proposed action</h3>
+        <article class="page-intro" data-search-item="conflict checker risk policy contradictions">
+          <h2>Conflict Monitor</h2>
+          <p>Track decision contradictions before rollout. Click actions to focus and investigate faster.</p>
+          <div class="stat-row">
+            <span class="stat-pill">1 Active Conflict</span>
+            <span class="stat-pill">Severity: High</span>
+            <span class="stat-pill">Owner: Platform Team</span>
+          </div>
+          <div class="quick-actions">
+            <button class="quick-action" type="button">Stripe</button>
+            <button class="quick-action" type="button">Manual invoice</button>
+            <button class="quick-action" type="button">Conflict evidence</button>
+          </div>
+        </article>
+
+        <article class="card conflict-shell" data-search-item="payment stripe manual invoice workflow contradiction">
+          <div class="card-head">
+            <h2>Proposed Action</h2>
+            <span class="severity-badge high">High Risk</span>
+          </div>
           <p>"Move payment processing from Stripe to manual invoice."</p>
           <p><strong>Potential conflict:</strong> contradicts past decision favoring automated Stripe workflows.</p>
+
+          <button class="collapsible-toggle" type="button" data-collapsible="conflict-evidence" aria-expanded="true">
+            <span>View Conflict Evidence</span>
+            <i class="ph ph-caret-down"></i>
+          </button>
+          <div id="conflict-evidence" class="collapsible-panel">
+            <div class="content-list">
+              <article class="content-item" data-search-item="policy stripe automation reliability decision">
+                <h3>Previous Approved Policy</h3>
+                <p>Stripe was selected for reliability, faster reconciliation, and lower operational overhead.</p>
+              </article>
+              <article class="content-item" data-search-item="finance manual process risk slow operations">
+                <h3>Operational Risk</h3>
+                <p>Manual invoicing introduces delayed settlements, reconciliation drift, and higher support overhead.</p>
+              </article>
+            </div>
+          </div>
         </article>
+
+        <div class="filter-empty" data-empty-state>No conflicts match this search. Try another keyword.</div>
       </section>
-      <div class="composer"><a class="btn primary" href="./dash.html" data-route="ask">Ask AI for details</a></div>
+      <div class="composer"><a class="btn primary" href="./chat.html" data-route="ask">Ask AI for details</a></div>
     </main>
   </div>
+  <script src="../js/insights-interactions.js"></script>
   <script src="../js/routes.js"></script>
   <script src="../js/sidebar.js"></script>
   <script>window.bindRouteNavigation();</script>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Provenance | Reasoning Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/chat.css" />
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside id="left-panel" class="left-panel" aria-label="Engine controls">
+      <button id="menu-close-btn" class="menu-close" aria-label="Close menu">&times;</button>
+      <div class="brand">
+        <div class="brand-mark"><i class="ph-fill ph-brain"></i></div>
+        <div>
+          <h1>Provenance</h1>
+          <p>Reasoning Engine</p>
+        </div>
+      </div>
+
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="./dashboard.html" data-route="dashboard" class="nav-item"><i class="ph ph-squares-four"></i> Dashboard</a>
+        <a href="./chat.html" data-route="ask" class="nav-item active"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
+        <a href="./decision-explorer.html" data-route="decision" class="nav-item"><i class="ph ph-graph"></i> Decision Explorer</a>
+        <a href="./source-library.html" data-route="sources" class="nav-item"><i class="ph ph-books"></i> Source Library</a>
+        <a href="./conflict-checker.html" data-route="conflicts" class="nav-item"><i class="ph ph-warning-circle"></i> Conflict Checker</a>
+      </nav>
+    
+      <div class="left-footer">
+        <a href="./settings.html" data-route="settings" class="nav-item footer-item"><i class="ph ph-gear"></i> Settings</a>
+        <a href="./login.html" data-route="login" class="nav-item footer-item danger"><i class="ph ph-sign-out"></i> Logout</a>
+      </div>
+
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <button id="menu-toggle-btn" class="menu-toggle" aria-label="Toggle menu"><i class="ph ph-list"></i></button>
+        <div class="search-wrap">
+          <i class="ph ph-magnifying-glass"></i>
+          <input id="global-search" type="text" placeholder="Ask anything about company decisions..." aria-label="Global search" />
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" aria-label="Notifications"><i class="ph ph-bell"></i></button>
+
+        </div>
+      </header>
+
+      <section id="chat-history" class="chat-history" aria-live="polite"></section>
+
+      <form id="chat-form" class="composer" autocomplete="off">
+        <input id="prompt-input" type="text" placeholder="Type your question here..." aria-label="Prompt input" />
+        <button id="send-btn" class="btn primary" type="submit"><i class="ph ph-paper-plane-right"></i> Send</button>
+      </form>
+    </main>
+
+    <aside class="right-panel" aria-label="Insights and sources">
+      <section class="card controls-card">
+        <div class="card-head">
+          <h2>Data Sources</h2>
+          <i class="ph ph-database"></i>
+        </div>
+        <div class="source-grid" aria-label="Connected data sources">
+          <button class="source-chip connected" type="button" data-source="slack" aria-pressed="true"><i class="ph ph-slack-logo"></i><span>Slack</span><b class="status-dot" aria-hidden="true"></b></button>
+          <button class="source-chip connected" type="button" data-source="gmail" aria-pressed="true"><i class="ph ph-envelope"></i><span>Gmail</span><b class="status-dot" aria-hidden="true"></b></button>
+          <button class="source-chip connected" type="button" data-source="github" aria-pressed="true"><i class="ph ph-github-logo"></i><span>GitHub</span><b class="status-dot" aria-hidden="true"></b></button>
+        </div>
+        <button id="clear-chat" class="btn ghost full" type="button"><i class="ph ph-trash"></i> Clear Chat</button>
+      </section>
+
+      <section class="card collapsible">
+        <div class="card-head">
+          <h2>Sources & Graph</h2>
+          <span id="confidence-pill" class="pill">--</span>
+        </div>
+        <div id="source-list" class="list card-content"></div>
+      </section>
+
+      <section class="card collapsible">
+        <div class="card-head">
+          <h2>Decision Graph</h2>
+          <i class="ph ph-caret-right"></i>
+        </div>
+        <div id="mini-graph" class="mini-graph card-content" role="img" aria-label="Decision graph visualization"></div>
+      </section>
+
+      <section class="card collapsible">
+        <div class="card-head">
+          <h2>Suggestions</h2>
+          <i class="ph ph-sparkle"></i>
+        </div>
+        <ul id="suggestion-list" class="suggestions card-content"></ul>
+      </section>
+    </aside>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const STORAGE_KEY = 'provenance.chatState.v1';
+      const chatForm = document.getElementById('chat-form');
+      const promptInput = document.getElementById('prompt-input');
+      const chatHistory = document.getElementById('chat-history');
+      const sendBtn = document.getElementById('send-btn');
+      
+      const sourceList = document.getElementById('source-list');
+      const miniGraph = document.getElementById('mini-graph');
+      const suggestionList = document.getElementById('suggestion-list');
+      const confidencePill = document.getElementById('confidence-pill');
+      const sourceChips = Array.from(document.querySelectorAll('.source-chip'));
+      const clearChatBtn = document.getElementById('clear-chat');
+      const collapsibleCards = Array.from(document.querySelectorAll('.card.collapsible'));
+
+      function saveState() {
+        const messages = Array.from(chatHistory.querySelectorAll('.chat-message:not(.loading)')).map((node) => ({
+          sender: node.classList.contains('user') ? 'user' : 'ai',
+          text: node.innerText
+        }));
+
+        const chipStates = {};
+        sourceChips.forEach((chip) => {
+          const key = chip.getAttribute('data-source');
+          if (!key) return;
+          chipStates[key] = chip.classList.contains('connected');
+        });
+
+        const collapsedStates = collapsibleCards.map((card) => card.classList.contains('collapsed'));
+
+        const state = {
+          messages,
+          confidence: confidencePill.textContent,
+          sourceListHTML: sourceList.innerHTML,
+          miniGraphHTML: miniGraph.innerHTML,
+          suggestionListHTML: suggestionList.innerHTML,
+          chipStates,
+          collapsedStates
+        };
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function restoreState() {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+
+        try {
+          const state = JSON.parse(raw);
+
+          chatHistory.innerHTML = '';
+          (state.messages || []).forEach((msg) => {
+            appendMessage(msg.text, msg.sender, false);
+          });
+
+          confidencePill.textContent = state.confidence || '--';
+          sourceList.innerHTML = state.sourceListHTML || '';
+          miniGraph.innerHTML = state.miniGraphHTML || '';
+          suggestionList.innerHTML = state.suggestionListHTML || '';
+
+          sourceChips.forEach((chip) => {
+            const key = chip.getAttribute('data-source');
+            const connected = key ? state.chipStates?.[key] !== false : true;
+            chip.classList.toggle('connected', connected);
+            chip.setAttribute('aria-pressed', connected ? 'true' : 'false');
+          });
+
+          collapsibleCards.forEach((card, idx) => {
+            const collapsed = Boolean(state.collapsedStates?.[idx]);
+            card.classList.toggle('collapsed', collapsed);
+          });
+        } catch (err) {
+          console.error('Could not restore chat state:', err);
+        }
+      }
+
+      chatForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const query = promptInput.value.trim();
+        if (!query) return;
+
+        // User message
+        appendMessage(query, 'user');
+        promptInput.value = '';
+        sendBtn.disabled = true;
+
+        // Add loading state
+        const loadingId = addLoading();
+
+        try {
+          const response = await fetch('/api/query', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: query })
+          });
+
+          const data = await response.json();
+          removeLoading(loadingId);
+          
+          // Display AI response
+          appendMessage(data.answer, 'ai');
+
+          // Update right panel data
+          confidencePill.textContent = data.confidence;
+          
+          // Update Sources
+          sourceList.innerHTML = data.sources.map(s => 
+            `<a href="${s.href}" class="source-link"><i class="ph ph-link"></i> ${s.label}</a>`
+          ).join('');
+
+          // Update Graph logic
+          miniGraph.innerHTML = `
+            <div class="graph-center">${data.graph.center}</div>
+            <ul class="graph-reasons">
+              ${data.graph.reasons.map(r => `<li>${r}</li>`).join('')}
+            </ul>
+          `;
+
+          // Update Suggestions
+          suggestionList.innerHTML = data.suggestions.map(s => 
+            `<li><button class="suggestion-btn" onclick="fillAndSubmit('${s.replace(/'/g, "\\'")}')">${s}</button></li>`
+          ).join('');
+
+          saveState();
+
+        } catch (error) {
+          console.error("Fetch error:", error);
+          removeLoading(loadingId);
+          appendMessage("Error communicating with the engine.", 'ai');
+        } finally {
+          sendBtn.disabled = false;
+        }
+      });
+
+      function appendMessage(text, sender, shouldPersist = true) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `chat-message ${sender}`;
+        msgDiv.innerText = text;
+        
+        chatHistory.appendChild(msgDiv);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+        if (shouldPersist) saveState();
+      }
+
+      function addLoading() {
+        const id = 'loading-' + Date.now();
+        const msgDiv = document.createElement('div');
+        msgDiv.id = id;
+        msgDiv.className = 'chat-message ai loading';
+        msgDiv.innerText = 'Thinking...';
+        chatHistory.appendChild(msgDiv);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+        return id;
+      }
+
+      function removeLoading(id) {
+        const el = document.getElementById(id);
+        if (el) el.remove();
+      }
+
+      window.fillAndSubmit = function(text) {
+        promptInput.value = text;
+        chatForm.dispatchEvent(new Event('submit'));
+      };
+
+      sourceChips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          const connected = chip.classList.toggle('connected');
+          chip.setAttribute('aria-pressed', connected ? 'true' : 'false');
+          saveState();
+        });
+      });
+
+      clearChatBtn?.addEventListener('click', () => {
+        chatHistory.innerHTML = '';
+        sourceList.innerHTML = '';
+        suggestionList.innerHTML = '';
+        miniGraph.innerHTML = '';
+        confidencePill.textContent = '--';
+        saveState();
+      });
+
+      collapsibleCards.forEach((card) => {
+        const head = card.querySelector('.card-head');
+        if (!head) return;
+        head.addEventListener('click', () => {
+          card.classList.toggle('collapsed');
+          saveState();
+        });
+      });
+
+      restoreState();
+
+      // Mobile Menu Toggle Logic
+      const menuToggleBtn = document.getElementById('menu-toggle-btn');
+      const menuCloseBtn = document.getElementById('menu-close-btn');
+      const leftPanel = document.getElementById('left-panel');
+
+      if (menuToggleBtn && leftPanel) {
+        menuToggleBtn.addEventListener('click', () => {
+          leftPanel.classList.add('open');
+        });
+      }
+
+      if (menuCloseBtn && leftPanel) {
+        menuCloseBtn.addEventListener('click', () => {
+          leftPanel.classList.remove('open');
+        });
+      }
+    });
+  </script>
+  <script src="../js/routes.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script>window.bindRouteNavigation();</script>
+</body>
+</html>

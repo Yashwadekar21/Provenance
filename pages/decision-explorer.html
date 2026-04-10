@@ -13,7 +13,7 @@
       <div class="brand"><div class="brand-mark"><i class="ph-fill ph-brain"></i></div><div><h1>Provenance</h1><p>Reasoning Engine</p></div></div>
       <nav class="primary-nav">
         <a href="./dashboard.html" data-route="dashboard" class="nav-item"><i class="ph ph-squares-four"></i> Dashboard</a>
-        <a href="./dash.html" data-route="ask" class="nav-item"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
+        <a href="./chat.html" data-route="ask" class="nav-item"><i class="ph ph-chat-circle-dots"></i> Ask AI</a>
         <a href="./decision-explorer.html" data-route="decision" class="nav-item active"><i class="ph ph-graph"></i> Decision Explorer</a>
         <a href="./source-library.html" data-route="sources" class="nav-item"><i class="ph ph-books"></i> Source Library</a>
         <a href="./conflict-checker.html" data-route="conflicts" class="nav-item"><i class="ph ph-warning-circle"></i> Conflict Checker</a>
@@ -39,6 +39,21 @@
       </header>
 
       <section class="chat-history explorer-layout">
+        <article class="page-intro" data-search-item="decision summary confidence timeline owner alternatives">
+          <h2>Decision Storyline</h2>
+          <p>Trace why this decision was made, what alternatives were considered, and which source evidence shaped the outcome.</p>
+          <div class="stat-row">
+            <span class="stat-pill">Confidence 92%</span>
+            <span class="stat-pill">4 Evidence Threads</span>
+            <span class="stat-pill">2 Alternatives</span>
+          </div>
+          <div class="quick-actions">
+            <button class="quick-action" type="button">Vendor A</button>
+            <button class="quick-action" type="button">Alternatives</button>
+            <button class="quick-action" type="button">Timeline</button>
+          </div>
+        </article>
+
         <article class="card">
           <div class="card-head"><h2>Decision Graph</h2><span class="pill">Graph Summary</span></div>
           <div class="decision-graph-box">
@@ -51,10 +66,10 @@
         <article class="card">
           <div class="card-head"><h2>Details Panel</h2><span class="pill">Confidence 92%</span></div>
           <ul class="dashboard-items">
-            <li><strong>Who proposed it</strong><span>Alice (Architecture) and Adam (DevOps)</span></li>
-            <li><strong>Alternatives considered</strong><span>Vendor B for lower base pricing, Vendor C for legacy compatibility</span></li>
-            <li><strong>Final rationale</strong><span>Vendor A reduced operational complexity while meeting API and scaling requirements.</span></li>
-            <li><strong>Source mapping</strong><span>Slack #123, Gmail vendor thread, DevOps meeting note</span></li>
+            <li data-search-item="owner alice adam architecture devops"><strong>Who proposed it</strong><span>Alice (Architecture) and Adam (DevOps)</span></li>
+            <li data-search-item="alternatives vendor b vendor c pricing compatibility"><strong>Alternatives considered</strong><span>Vendor B for lower base pricing, Vendor C for legacy compatibility</span></li>
+            <li data-search-item="final rationale complexity api scaling"><strong>Final rationale</strong><span>Vendor A reduced operational complexity while meeting API and scaling requirements.</span></li>
+            <li data-search-item="source mapping slack gmail meeting"><strong>Source mapping</strong><span>Slack #123, Gmail vendor thread, DevOps meeting note</span></li>
           </ul>
           <div class="sources">
             <a class="source-badge" href="#">📝 Slack #123</a>
@@ -76,9 +91,10 @@
         </details>
       </section>
 
-      <div class="composer"><a class="btn primary" href="./dash.html" data-route="ask">Ask Follow-up in Chat</a></div>
+      <div class="composer"><a class="btn primary" href="./chat.html" data-route="ask">Ask Follow-up in Chat</a></div>
     </main>
   </div>
+  <script src="../js/insights-interactions.js"></script>
   <script src="../js/routes.js"></script>
   <script src="../js/sidebar.js"></script>
   <script>window.bindRouteNavigation();</script>

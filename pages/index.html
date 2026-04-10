@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Provenance | The Memory Engine for Teams</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../css/landing.css" />
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand" aria-label="Provenance Home">
+        <span class="brand-mark"><i class="ph-fill ph-brain"></i></span>
+        <span>Provenance</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="/pages/dashboard.html">Capabilities</a>
+        <a href="/pages/chat.html">Live Demo</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-ghost" href="/pages/login.html">Log in</a>
+        <!-- Get Started points to login as requested -->
+        <a class="btn btn-primary" href="/pages/login.html">Get Started <i class="ph ph-arrow-right"></i></a>
+      </div>
+
+      <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Menu">
+        <i class="ph ph-list"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Hero Section -->
+  <main class="container">
+    <section class="hero fade-in">
+      <h1>Your company's memory, instantly accessible.</h1>
+      <p>The AI-powered reasoning engine that untangles your decisions. Connect context from Slack, Email, GitHub, and Docs into one clear narrative.</p>
+      
+      <div class="hero-actions">
+        <!-- Get Started points to login as requested -->
+        <a class="btn btn-primary" href="/pages/login.html">Get Started for Free <i class="ph ph-arrow-right"></i></a>
+        <a class="btn btn-outline" href="/pages/chat.html">View Live Demo</a>
+      </div>
+    </section>
+
+    <!-- Dashboard UI Mockup -->
+    <div class="dashboard-preview fade-in">
+      <div class="mock-browser">
+        <div class="mock-dot"></div>
+        <div class="mock-dot"></div>
+        <div class="mock-dot"></div>
+      </div>
+      <div class="mock-content" style="grid-template-columns: 1fr; @media(min-width: 768px) { grid-template-columns: 200px 1fr 250px; }">
+        <div style="background: linear-gradient(to right, #f8fafc, #f1f5f9); height: 350px; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+          <h2 style="color: #64748b; font-size: 1.25rem; font-weight: 500;">AI Engine Visual Snapshot</h2>
+          <div style="margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; padding: 0 40px;">
+            <div style="background: #bae6fd; padding: 10px 20px; border-radius: 20px; color: #0369a1; font-weight: 600;">Data Ingested</div>
+            <div style="background: #bbf7d0; padding: 10px 20px; border-radius: 20px; color: #166534; font-weight: 600;">Graph Logic Mapped</div>
+            <div style="background: #fbcfe8; padding: 10px 20px; border-radius: 20px; color: #9d174d; font-weight: 600;">Insights Ready</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="features fade-in">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ph ph-chat-circle-dots"></i></div>
+        <h3>Natural-language Q&A</h3>
+        <p>Ask questions in plain language and get clear, source-backed explanations securely in seconds.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ph ph-graph"></i></div>
+        <h3>Decision Explorer</h3>
+        <p>Visualize decision paths, alternatives, and trade-offs to make institutional context easy to understand.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ph ph-warning-circle"></i></div>
+        <h3>Conflict Detection</h3>
+        <p>Spot contradictions between new proposals and previously approved decisions before they spread.</p>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section style="text-align: center; padding: 80px 0 120px;" class="fade-in">
+      <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Ready to stop reinventing the wheel?</h2>
+      <p style="color: var(--muted); font-size: 1.1rem; margin-bottom: 40px;">Join modern teams using Provenance to turn scattered knowledge into confident action.</p>
+      <a class="btn btn-primary" href="/pages/login.html" style="font-size: 1.2rem; padding: 16px 32px;">Start your free trial <i class="ph ph-rocket-launch"></i></a>
+    </section>
+  </main>
+
+  <!-- Sticky Floating Subscribe Form on the Side -->
+  <form id="floating-subscribe-form" class="floating-subscribe fade-in" aria-label="Subscribe to newsletter form">
+    <i class="ph ph-envelope-simple" style="color: #64748b; font-size: 1.2rem;"></i>
+    <input type="email" placeholder="Subscribe to updates..." required aria-label="Email address for subscription">
+    <button type="submit" class="btn btn-primary">Subscribe</button>
+  </form>
+
+  <footer style="text-align: center; color: var(--muted); padding: 40px 0; border-top: 1px solid var(--line);">
+    <p>&copy; <span id="year"></span> Provenance Inc. All rights reserved.</p>
+  </footer>
+
+  <!-- Include the interaction script -->
+  <script src="../js/landing.js"></script>
+</body>
+</html>

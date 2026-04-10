@@ -1,7 +1,7 @@
 (() => {
   window.APP_ROUTES = {
     dashboard: './dashboard.html',
-    ask: './dash.html',
+    ask: './chat.html',
     decision: './decision-explorer.html',
     sources: './source-library.html',
     conflicts: './conflict-checker.html',
